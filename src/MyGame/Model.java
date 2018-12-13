@@ -62,7 +62,7 @@ public class Model {
     /**
      * Метод для отката к предыдущему состоянию
      */
-    public void rollback() {
+    void rollback() {
         if (!previousStates.empty() && !previousScores.empty()) {
             gameTiles = previousStates.pop();
             score = previousScores.pop();
@@ -70,9 +70,9 @@ public class Model {
     }
 
     /**
-     * @return true в случае, если в текущей позиции возможно сделать ход так, чтобы состояние игрового поля изменилось. Иначе - false.
+     * @return true если можно сдлать ход, иначе false.
      */
-    public boolean canMove() {
+    boolean canMove() {
         //если есть пустые клетки
         if (!getEmptyTiles().isEmpty())
             return true;
@@ -96,7 +96,7 @@ public class Model {
      * Метод для того, чтобы при необходимости
      * начать новую игру, не приходилось создавать новую модель, а можно было бы просто вернуться в начальное состояние, вызвав его.
      */
-    protected void resetGameTiles() {
+    void resetGameTiles() {
         for (int i = 0; i < gameTiles.length; i++) {
             for (int j = 0; j < gameTiles[i].length; j++) {
                 gameTiles[i][j] = new Tile();
@@ -179,14 +179,14 @@ public class Model {
         return result;
     }
 
-    public Tile[][] getGameTiles() {
+    Tile[][] getGameTiles() {
         return gameTiles;
     }
 
     /**
      * Метод вызывает один из методов движения случайным образом
      */
-    public void randomMove() {
+    void randomMove() {
         int n = ((int) (Math.random() * 100)) % 4;
         switch (n) {
             case 0:
@@ -308,7 +308,7 @@ public class Model {
         return moveEfficiency;
     }
 
-    public void autoMove() {
+    void autoMove() {
         final int NUMBER_OF_MOVES = 4;
         PriorityQueue<MoveEfficiency> moveEfficiencyPriorityQueue = new PriorityQueue<>(NUMBER_OF_MOVES,Collections.reverseOrder());
 

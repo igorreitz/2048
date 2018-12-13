@@ -28,6 +28,6 @@ public class Main {
         game.setLocationRelativeTo(null);
         game.setVisible(true);
 
-        JOptionPane.showMessageDialog(game, "Управляй клавишами ВВЕРХ, ВНИЗ, ВПРАВО, ВЛЕВО. Z - отмена хода, A - автоматический ход, R - случайный ход, N - новая игра.");
+        JOptionPane.showMessageDialog(game, "Управления стрелками UP, DOWN, RIGHT, LEFT. Z - отмена хода, A - автоматический ход, R - случайный ход, N - новая игра.");
     }
 }
