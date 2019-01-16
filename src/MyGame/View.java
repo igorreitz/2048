@@ -30,13 +30,13 @@ public class View extends JPanel {
                 drawTile(g, controller.getGameTiles()[y][x], x, y);
             }
         }
-
+        //TODO победить эксэпшн при победе или поражении: Exception in thread "AWT-EventQueue-0" java.lang.StackOverflowError
         if (isGameWon) {
-            g.drawString("ПОБЕДА!!!", 130, 465);
-            //JOptionPane.showMessageDialog(this, "УРА, ПОБЕДА!!!");
+            //g.drawString("ПОБЕДА!!!", 130, 465);
+            JOptionPane.showMessageDialog(this, "УРА, ПОБЕДА!!!");
         } else if(isGameLost) {
-            g.drawString("Ты проиграл :(", 100, 465);
-            //JOptionPane.showMessageDialog(this, "Ты проиграл, попробуй ещё раз :(");
+            //g.drawString("Ты проиграл :(", 100, 465);
+            JOptionPane.showMessageDialog(this, "Ты проиграл, попробуй ещё раз :(");
         } else
             g.drawString("Очки: " + controller.getScore(), 140, 465);
     }
