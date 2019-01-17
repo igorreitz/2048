@@ -30,15 +30,7 @@ public class View extends JPanel {
                 drawTile(g, controller.getGameTiles()[y][x], x, y);
             }
         }
-        //TODO победить эксэпшн при победе или поражении: Exception in thread "AWT-EventQueue-0" java.lang.StackOverflowError
-        if (isGameWon) {
-            //g.drawString("ПОБЕДА!!!", 130, 465);
-            JOptionPane.showMessageDialog(this, "УРА, ПОБЕДА!!!");
-        } else if(isGameLost) {
-            //g.drawString("Ты проиграл :(", 100, 465);
-            JOptionPane.showMessageDialog(this, "Ты проиграл, попробуй ещё раз :(");
-        } else
-            g.drawString("Очки: " + controller.getScore(), 140, 465);
+        g.drawString("Очки: " + controller.getScore(), 140, 465);
     }
 
     private void drawTile(Graphics g2, Tile tile, int x, int y) {
@@ -48,7 +40,7 @@ public class View extends JPanel {
         int xOffset = offsetCoors(x);
         int yOffset = offsetCoors(y);
         g.setColor(tile.getTileColor());
-        g.fillRoundRect(xOffset, yOffset, TILE_SIZE, TILE_SIZE , 8, 8);
+        g.fillRoundRect(xOffset, yOffset, TILE_SIZE, TILE_SIZE, 8, 8);
         g.setColor(tile.getFontColor());
         final int size = value < 100 ? 36 : value < 1000 ? 32 : 24;
         final Font font = new Font(FONT_NAME, Font.BOLD, size);
@@ -66,5 +58,19 @@ public class View extends JPanel {
 
     private static int offsetCoors(int arg) {
         return arg * (TILE_MARGIN + TILE_SIZE) + TILE_MARGIN;
+    }
+
+    /**
+     * Метод вызывается контроллером для отображения результатов игры. Дополнительно поддерживает отмену хода после проигрыша.
+     */
+    public void showResultDialog() {
+        if (isGameWon) {
+            JOptionPane.showMessageDialog(this, "УРА, ПОБЕДА!!!");
+        } else if (isGameLost) {
+            JOptionPane.showMessageDialog(this, "Увы, игра окончена :( \nНажми Z, чтобы отменить последний ход, либо начни заново (ESC).");
+            //поддержка отмены хода после проигрыша
+            isGameLost = false;
+            controller.rollback();
+        }
     }
 }

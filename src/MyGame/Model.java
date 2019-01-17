@@ -184,30 +184,6 @@ public class Model {
     }
 
     /**
-     * Метод вызывает один из методов движения случайным образом
-     */
-    void randomMove() {
-        int n = ((int) (Math.random() * 100)) % 4;
-        switch (n) {
-            case 0:
-                left();
-                break;
-            case 1:
-                right();
-                break;
-            case 2:
-                up();
-                break;
-            case 3:
-                down();
-                break;
-            default:
-                left();
-                break;
-        }
-    }
-
-    /**
      * Метод будет для каждой строки массива gameTiles вызывать методы compressTiles и mergeTiles
      * и добавлять одну плитку с помощью метода addTile в том случае, если это необходимо.
      */
@@ -308,16 +284,20 @@ public class Model {
         return moveEfficiency;
     }
 
+    /**
+     * Метод, выбирающий оптимальный ход. Вызывает необходимый метод для выполнения хода
+     * @see
+     */
     void autoMove() {
         final int NUMBER_OF_MOVES = 4;
-        PriorityQueue<MoveEfficiency> moveEfficiencyPriorityQueue = new PriorityQueue<>(NUMBER_OF_MOVES,Collections.reverseOrder());
+        PriorityQueue<MoveEfficiency> moveEfficiencyPriorityQueue = new PriorityQueue<>(NUMBER_OF_MOVES, Collections.reverseOrder());
 
         moveEfficiencyPriorityQueue.add(getMoveEfficiency(this::left));
         moveEfficiencyPriorityQueue.add(getMoveEfficiency(this::right));
         moveEfficiencyPriorityQueue.add(getMoveEfficiency(this::up));
         moveEfficiencyPriorityQueue.add(getMoveEfficiency(this::down));
 
-        Move move= moveEfficiencyPriorityQueue.poll().getMove();
+        Move move = moveEfficiencyPriorityQueue.poll().getMove();
         move.move();
     }
 

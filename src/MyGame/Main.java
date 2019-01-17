@@ -13,7 +13,7 @@ public class Main {
      *
      * @param args параметры командной строки
      */
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Model model = new Model();
         Controller controller = new Controller(model);
         JFrame game = new JFrame();
@@ -28,6 +28,6 @@ public class Main {
         game.setLocationRelativeTo(null);
         game.setVisible(true);
 
-        JOptionPane.showMessageDialog(game, "Управления стрелками UP, DOWN, RIGHT, LEFT. Z - отмена хода, A - автоматический ход, R - случайный ход, N - новая игра.");
+        JOptionPane.showMessageDialog(game, "Управления стрелками UP, DOWN, RIGHT, LEFT. Z - отмена хода, A - автоматический ход, ESC - новая игра.");
     }
 }
